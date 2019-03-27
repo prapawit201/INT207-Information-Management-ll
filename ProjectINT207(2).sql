@@ -22,3 +22,40 @@ Engine decimal(1,2)not null,
 Transmission varchar2(2)not null,
 constraint pk_Car_CarNo primary key (CarNo)
 );
+
+create table Branch (
+branchNo varchar2(13) not null,
+province varchar2(40) not null,
+address varchar2(40) not null,
+);
+
+create table Customer (
+customerNo varchar2(13) not null,
+fname varchar2(40) not null,
+lname varchar2(40) not null,
+dlicense boolean not null,
+idcard/passportno varchar2(40) not null,
+email varchar2(40) not null,
+phone number(10),
+bdate date,
+password varchar2(40)
+);
+
+create table Rent (
+rentNo varchar2(13) not null,
+pickDate date not null,
+returnDate date not null,
+pickBranch varchar2(40) not null,
+returnBranch varchar2(40) not null,
+price number(5) not null,
+delayPenalty varchar2(40)
+);
+
+create table Maintenance (
+maintNo varchar2(13) not null,
+maintDate date not null,
+maintPrice number(5) not null,
+maintType varchar2(40) not null,
+maintDetail varchar2(100) not null
+
+);
