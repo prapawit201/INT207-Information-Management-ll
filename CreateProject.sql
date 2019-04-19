@@ -11,6 +11,19 @@ drop table RScar;
 drop table RSBRANCH;
 drop table RSMaintenance;
 
+create table ZRSPROJRENT;
+create table ZRSPROJcustomer;
+create table ZRSPROJstaff;
+create table ZRSPROJcar;
+create table ZRSPROJBRANCH;
+create table ZRSPROJMaintenance;
+
+drop table ZRSPROJRENT;
+drop table ZRSPROJcustomer;
+drop table ZRSPROJstaff;
+drop table ZRSPROJcar;
+drop table ZRSPROJBRANCH;
+drop table ZRSPROJMaintenance;
 
 create table RSBranch (
 Branchno varchar2(13) not null,

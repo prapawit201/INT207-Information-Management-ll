@@ -1,3 +1,4 @@
+revoke select on db6051.ZRSPROJRENT from rsowner ;
 --position owner
 grant select on db6051.RSRENT to RSowner;
 grant select,insert,update,delete on db6051.RSbranch to RSowner;
