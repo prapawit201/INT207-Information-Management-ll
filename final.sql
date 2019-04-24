@@ -270,11 +270,12 @@ CREATE or replace VIEW yla_r   AS SELECT r.* FROM RSrent r join RScar c on r.car
 CREATE or replace VIEW yla_m   AS SELECT m.* FROM RSmaintanance m join RScar c on m.maintNo=c.maintNo WHERE c.branchNo='RSB-122' ;
 CREATE or replace VIEW yla_cu   AS SELECT cu.* FROM RScustomer cu join RSrent r on cu.customerNo=cu.customerNo join RSbranch b on r.pickbranch=b.branchName WHERE b.branchNo='RSB-122' ;
 
-create index RSSTAFF_BT_IDX on rsstaff(STAFFNO,FNAME,LNAME,POSITION,SALARY,BRANCHNO);
-create bitmap index  RSrent_BM_IDX on rsrent(RENTNO,PICKDATE,RETURNDATE,PICKBRANCH,RETURNBRANCH,PRICE,CUSTOMERNO,CARNO,STAFFNO);
-create bitmap index RScar_BM_IDX on rscar(CARNO,BRAND,CARSIZE,LUGGUAGE,PRICE,SEAT,CARTYPE,ENGINE,TRANSMISSION,BRANCHNO,MAINTNO);
-create bitmap index RSbranch_BM_IDX on rsbranch(BRANCHNO,BRANCHNAME,PROVINCE,ADDRESS);
-create index RSCustomer_BT_IDX on rscustomer(CUSTOMERNO,FNAME,PHONE);
+
+
+create bitmap index  RSrent_BM_IDX on rsrent(PICKBRANCH,CARNO,PICKDATE);
+create bitmap index RScar_BM_IDX on rscar(CARNO,BRAND,BRANCHNO);
+create bitmap index RSbranch_BM_IDX on rsbranch(BRANCHNO,BRANCHNAME);
+
 
   --insert in branch table
   INSERT INTO RSBranch(branchNo,branchName,province,address) VALUES ('RSB-100','RSPT-BKK','Bangkok','9802 Placerat. Avenue');
