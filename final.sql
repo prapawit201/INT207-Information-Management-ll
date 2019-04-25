@@ -23,12 +23,12 @@ grant CREATE session to RScustomer;
 SELECT    *    FROM  user_sys_privs ;
 
 
-drop table RSRENT;
-drop table RScustomer;
-drop table RSstaff;
-drop table RScar;
-drop table RSBRANCH;
-drop table RSMaintenance;
+drop table RSRENT cascade purge;
+drop table RScustomer cascade purge;
+drop table RSstaff cascade purge;
+drop table RScar cascade purge;
+drop table RSBRANCH cascade purge;
+drop table RSMaintenance cascade purge;
 
 create table RSBranch (
 Branchno varchar2(13) not null,
@@ -108,6 +108,168 @@ constraint fk_Rent_customerNo foreign key (customerNo) references RSCustomer(cus
 constraint fk_Rent_CarNo foreign key (CarNo) references RSCar(CarNo),
 constraint fk_Rent_StaffNo foreign key (StaffNo) references RSStaff(StaffNo)
 );
+
+-- VIEW for Staff & Customer
+DROP VIEW bkk_m_b   ;
+DROP VIEW bkk_m_s   ;
+DROP VIEW bkk_m_c   ;
+DROP VIEW bkk_r   ;
+DROP VIEW bkk_m   ;
+DROP VIEW bkk_cu   ;
+
+DROP VIEW pkt_m_s   ;
+DROP VIEW pkt_m_b   ;
+DROP VIEW pkt_m_c   ;
+DROP VIEW pkt_r   ;
+DROP VIEW pkt_m   ;
+DROP VIEW pkt_cu   ;
+
+DROP VIEW cnx_m_s   ;
+DROP VIEW cnx_m_b   ;
+DROP VIEW cnx_m_c   ;
+DROP VIEW cnx_r   ;
+DROP VIEW cnx_m   ;
+DROP VIEW cnx_cu   ;
+
+DROP VIEW kbi_m_s   ;
+DROP VIEW kbi_m_b   ;
+DROP VIEW kbi_m_c   ;
+DROP VIEW kbi_r   ;
+DROP VIEW kbi_m   ;
+DROP VIEW kbi_cu   ;
+
+DROP VIEW ryg_m_s   ;
+DROP VIEW ryg_m_b   ;
+DROP VIEW ryg_m_c   ;
+DROP VIEW ryg_r   ;
+DROP VIEW ryg_m   ;
+DROP VIEW ryg_cu   ;
+
+DROP VIEW ska_m_s   ;
+DROP VIEW ska_m_b   ;
+DROP VIEW ska_m_c   ;
+DROP VIEW ska_r   ;
+DROP VIEW ska_m   ;
+DROP VIEW ska_cu   ;
+
+DROP VIEW cri_m_s   ;
+DROP VIEW cri_m_b   ;
+DROP VIEW cri_m_c   ;
+DROP VIEW cri_r   ;
+DROP VIEW cri_m   ;
+DROP VIEW cri_cu   ;
+
+DROP VIEW plk_m_s   ;
+DROP VIEW plk_m_b   ;
+DROP VIEW plk_m_c   ;
+DROP VIEW plk_r   ;
+DROP VIEW plk_m   ;
+DROP VIEW plk_cu   ;
+
+DROP VIEW udn_m_s   ;
+DROP VIEW udn_m_b   ;
+DROP VIEW udn_m_c   ;
+DROP VIEW udn_r   ;
+DROP VIEW udn_m   ;
+DROP VIEW udn_cu   ;
+
+DROP VIEW kkn_m_s   ;
+DROP VIEW kkn_m_b   ;
+DROP VIEW kkn_m_c   ;
+DROP VIEW kkn_r   ;
+DROP VIEW kkn_m   ;
+DROP VIEW kkn_cu   ;
+
+DROP VIEW npm_m_s   ;
+DROP VIEW npm_m_b   ;
+DROP VIEW npm_m_c   ;
+DROP VIEW npm_r   ;
+DROP VIEW npm_m   ;
+DROP VIEW npm_cu   ;
+
+DROP VIEW snk_m_s   ;
+DROP VIEW snk_m_b   ;
+DROP VIEW snk_m_c   ;
+DROP VIEW snk_r   ;
+DROP VIEW snk_m   ;
+DROP VIEW snk_cu   ;
+
+DROP VIEW ubn_m_s   ;
+DROP VIEW ubn_m_b   ;
+DROP VIEW ubn_m_c   ;
+DROP VIEW ubn_r   ;
+DROP VIEW ubn_m   ;
+DROP VIEW ubn_cu   ;
+
+DROP VIEW sni_m_s   ;
+DROP VIEW sni_m_b   ;
+DROP VIEW sni_m_c   ;
+DROP VIEW sni_r   ;
+DROP VIEW sni_m   ;
+DROP VIEW sni_cu   ;
+
+DROP VIEW nst_m_s   ;
+DROP VIEW nst_m_b   ;
+DROP VIEW nst_m_c   ;
+DROP VIEW nst_r   ;
+DROP VIEW nst_m   ;
+DROP VIEW nst_cu   ;
+
+DROP VIEW trg_m_s   ;
+DROP VIEW trg_m_b   ;
+DROP VIEW trg_m_c   ;
+DROP VIEW trg_r   ;
+DROP VIEW trg_m   ;
+DROP VIEW trg_cu   ;
+
+DROP VIEW nwt_m_s   ;
+DROP VIEW nwt_m_b   ;
+DROP VIEW nwt_m_c   ;
+DROP VIEW nwt_r   ;
+DROP VIEW nwt_m   ;
+DROP VIEW nwt_cu   ;
+
+DROP VIEW nan_m_s   ;
+DROP VIEW nan_m_b   ;
+DROP VIEW nan_m_c   ;
+DROP VIEW nan_r   ;
+DROP VIEW nan_m   ;
+DROP VIEW nan_cu   ;
+
+DROP VIEW ret_m_s   ;
+DROP VIEW ret_m_b   ;
+DROP VIEW ret_m_c   ;
+DROP VIEW ret_r   ;
+DROP VIEW ret_m   ;
+DROP VIEW ret_cu   ;
+
+DROP VIEW lei_m_s   ;
+DROP VIEW lei_m_b   ;
+DROP VIEW lei_m_c   ;
+DROP VIEW lei_r   ;
+DROP VIEW lei_m   ;
+DROP VIEW lei_cu   ;
+
+DROP VIEW brm_m_s   ;
+DROP VIEW brm_m_b   ;
+DROP VIEW brm_m_c   ;
+DROP VIEW brm_r   ;
+DROP VIEW brm_m   ;
+DROP VIEW brm_cu   ;
+
+DROP VIEW rng_m_s   ;
+DROP VIEW rng_m_b   ;
+DROP VIEW rng_m_c   ;
+DROP VIEW rng_r   ;
+DROP VIEW rng_m   ;
+DROP VIEW rng_cu   ;
+
+DROP VIEW yla_m_s   ;
+DROP VIEW yla_m_b   ;
+DROP VIEW yla_m_c   ;
+DROP VIEW yla_r   ;
+DROP VIEW yla_m   ;
+DROP VIEW yla_cu   ;
 
 CREATE or replace VIEW bkk_m_b   AS SELECT * FROM RSbranch WHERE branchNo='RSB-100' ;
 CREATE or replace VIEW bkk_m_s   AS SELECT * FROM RSstaff WHERE branchNo='RSB-100' ;
@@ -270,12 +432,16 @@ CREATE or replace VIEW yla_r   AS SELECT * FROM RSrent WHERE pickBranch = 'RSPT-
 CREATE or replace VIEW yla_m   AS SELECT m.* FROM RSmaintenance m join RScar c on m.maintNo=c.maintNo WHERE c.branchNo='RSB-122' ;
 CREATE or replace VIEW yla_cu   AS SELECT cu.customerNo,cu.Fname,cu.Lname,cu.dlicense,cu.idcardpassportno,cu.email,cu.phone,cu.paymentMethod,cu.bdate FROM RScustomer cu join RSrent r on cu.customerNo=r.customerNo WHERE r.pickBranch='RSPT-YLA' ;
 
-
+--index
+drop index RSrent_BM_IDX;
+drop index RScar_BM_IDX;
+drop index RSbranch_BM_IDX;
+drop index RSstaff_BT_IDX;
 
 create bitmap index  RSrent_BM_IDX on rsrent(PICKBRANCH,CARNO,PICKDATE);
 create bitmap index RScar_BM_IDX on rscar(CARNO,BRAND,BRANCHNO);
 create bitmap index RSbranch_BM_IDX on rsbranch(BRANCHNO,BRANCHNAME);
-create  index  RSstaff_BT_IDX on rsstaff(salary,branchno);
+create index  RSstaff_BT_IDX on rsstaff(salary,branchno);
 
 
   --insert in branch table
