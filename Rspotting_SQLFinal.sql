@@ -1656,3 +1656,32 @@ CREATE OR REPLACE VIEW yla_cu AS
         JOIN rsrent r ON cu.customerno = r.customerno
     WHERE
         r.pickbranch = 'RSPT-YLA';
+
+/*
+        ===================================
+      ======== Insert data to  RsBranch ======
+        ===================================
+*/
+INSERT INTO RSBranch(branchNo,branchName,province,address) VALUES ('RSB-100','RSPT-BKK','Bangkok','9802 Placerat. Avenue');
+INSERT INTO RSBranch(branchNo,branchName,province,address) VALUES ('RSB-101','RSPT-PKT','Phuket','1855 Duis Avenue');
+INSERT INTO RSBranch(branchNo,branchName,province,address) VALUES ('RSB-102','RSPT-CNX','Chiang Mai','4662 Euismod Av.');
+INSERT INTO RSBranch(branchNo,branchName,province,address) VALUES ('RSB-103','RSPT-KBI','Krabi','581-9681 A, Avenue');
+INSERT INTO RSBranch(branchNo,branchName,province,address) VALUES ('RSB-104','RSPT-RYG','Rayong','Ap #636-4094 Aenean Rd.');
+INSERT INTO RSBranch(branchNo,branchName,province,address) VALUES ('RSB-105','RSPT-SKA','Song Kla','P.O. Box 632, 9851 Pede St.');
+INSERT INTO RSBranch(branchNo,branchName,province,address) VALUES ('RSB-106','RSPT-CRI','Chiang Rai','5564 A Street');
+INSERT INTO RSBranch(branchNo,branchName,province,address) VALUES ('RSB-107','RSPT-PLK','Phitsanulok','P.O. Box 592, 7228 Vitae, Street');
+INSERT INTO RSBranch(branchNo,branchName,province,address) VALUES ('RSB-108','RSPT-UDN','Udonthani','P.O. Box 420, 2036 Aliquet Road');
+INSERT INTO RSBranch(branchNo,branchName,province,address) VALUES ('RSB-109','RSPT-KKN','Khon Kaen','Ap #248-2048 Praesent Rd.');
+INSERT INTO RSBranch(branchNo,branchName,province,address) VALUES ('RSB-110','RSPT-NPM','Nakhon Phanom','3336 Scelerisque Avenue');
+INSERT INTO RSBranch(branchNo,branchName,province,address) VALUES ('RSB-111','RSPT-SNK','Sakon Nakhon','1306 Est, Av.');
+INSERT INTO RSBranch(branchNo,branchName,province,address) VALUES ('RSB-112','RSPT-UBN','Ubon Ratchathani','P.O. Box 931, 6972 Lorem Avenue');
+INSERT INTO RSBranch(branchNo,branchName,province,address) VALUES ('RSB-113','RSPT-SNI','Surat Thani','P.O. Box 989, 2678 Vehicula Avenue');
+INSERT INTO RSBranch(branchNo,branchName,province,address) VALUES ('RSB-114','RSPT-NST','Nakhon Si Thammarat','P.O. Box 179, 6495 Facilisis St.');
+INSERT INTO RSBranch(branchNo,branchName,province,address) VALUES ('RSB-115','RSPT-TRG','Trung','5886 Etiam Ave');
+INSERT INTO RSBranch(branchNo,branchName,province,address) VALUES ('RSB-116','RSPT-NWT','Narathiwat','395-5573 Vivamus Rd.');
+INSERT INTO RSBranch(branchNo,branchName,province,address) VALUES ('RSB-117','RSPT-NAN','Nan','2585 Tellus St.');
+INSERT INTO RSBranch(branchNo,branchName,province,address) VALUES ('RSB-118','RSPT-RET','Roi Et','Ap #135-2031 Blandit Road');
+INSERT INTO RSBranch(branchNo,branchName,province,address) VALUES ('RSB-119','RSPT-LEI','Loei','6074 Purus, St.');
+INSERT INTO RSBranch(branchNo,branchName,province,address) VALUES ('RSB-120','RSPT-BRM','Burirum','P.O. Box 246, 2292 Auctor, Road');
+INSERT INTO RSBranch(branchNo,branchName,province,address) VALUES ('RSB-121','RSPT-RNG','Ranong','Ap #172-9883 Consectetuer Rd.');
+INSERT INTO RSBranch(branchNo,branchName,province,address) VALUES ('RSB-122','RSPT-YLA','Yala','Ap #735-6716 Aliquet. Rd.');
