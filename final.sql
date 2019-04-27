@@ -20,15 +20,16 @@ create user RScustomer
 IDENTIFIED by lovesql;
 grant CREATE session to RScustomer;
 
-SELECT    *    FROM  user_sys_privs ;
+SELECT * FROM  user_sys_privs ;
 
 
-drop table RSRENT cascade purge;
-drop table RScustomer cascade purge;
-drop table RSstaff cascade purge;
-drop table RScar cascade purge;
-drop table RSBRANCH cascade purge;
-drop table RSMaintenance cascade purge;
+-- clean data
+drop table RSRENT CASCADE CONSTRAINTS;
+drop table RScustomer CASCADE CONSTRAINTS;
+drop table RSstaff CASCADE CONSTRAINTS;
+drop table RScar CASCADE CONSTRAINTS;
+drop table RSBRANCH CASCADE CONSTRAINTS;
+drop table RSMaintenance CASCADE CONSTRAINTS;
 
 create table RSBranch (
 Branchno varchar2(13) not null,
