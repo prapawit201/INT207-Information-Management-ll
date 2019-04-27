@@ -283,3 +283,1376 @@ CREATE TABLE rsrent (
     CONSTRAINT fk_rent_staffno FOREIGN KEY ( staffno )
         REFERENCES rsstaff ( staffno )
 );
+
+/*
+===================================
+======== CREATE INDEX ======
+===================================
+*/
+CREATE BITMAP INDEX rsrent_bm_idx ON
+    rsrent (
+        pickbranch,
+        carno,
+        pickdate
+    );
+
+CREATE BITMAP INDEX rscar_bm_idx ON
+    rscar (
+        carno,
+        brand,
+        branchno
+    );
+
+CREATE BITMAP INDEX rsbranch_bm_idx ON
+    rsbranch (
+        branchno,
+        branchname
+    );
+
+CREATE INDEX rsstaff_bt_idx ON
+    rsstaff (
+        salary,
+        branchno
+    );
+
+
+
+/*
+    ===================================
+    ======== CREATE VIEW  ======
+    ===================================
+*/
+
+CREATE OR REPLACE VIEW bkk_m_b AS
+    SELECT
+        *
+    FROM
+        rsbranch
+    WHERE
+        branchno = 'RSB-100';
+
+CREATE OR REPLACE VIEW bkk_m_s AS
+    SELECT
+        *
+    FROM
+        rsstaff
+    WHERE
+        branchno = 'RSB-100';
+
+CREATE OR REPLACE VIEW bkk_m_c AS
+    SELECT
+        *
+    FROM
+        rscar
+    WHERE
+        branchno = 'RSB-100';
+
+CREATE OR REPLACE VIEW bkk_r AS
+    SELECT
+        *
+    FROM
+        rsrent
+    WHERE
+        pickbranch = 'RSPT-BKK';
+
+CREATE OR REPLACE VIEW bkk_m AS
+    SELECT
+        m.*
+    FROM
+        rsmaintenance m
+        JOIN rscar c ON m.maintno = c.maintno
+    WHERE
+        c.branchno = 'RSB-100';
+
+CREATE OR REPLACE VIEW bkk_cu AS
+    SELECT
+        cu.customerno,
+        cu.fname,
+        cu.lname,
+        cu.dlicense,
+        cu.idcardpassportno,
+        cu.email,
+        cu.phone,
+        cu.paymentmethod,
+        cu.bdate
+    FROM
+        rscustomer cu
+        JOIN rsrent r ON cu.customerno = r.customerno
+    WHERE
+        r.pickbranch = 'RSPT-BKK';
+
+CREATE OR REPLACE VIEW pkt_m_s AS
+    SELECT
+        *
+    FROM
+        rsstaff
+    WHERE
+        branchno = 'RSB-101';
+
+CREATE OR REPLACE VIEW pkt_m_b AS
+    SELECT
+        *
+    FROM
+        rsbranch
+    WHERE
+        branchno = 'RSB-101';
+
+CREATE OR REPLACE VIEW pkt_m_c AS
+    SELECT
+        *
+    FROM
+        rscar
+    WHERE
+        branchno = 'RSB-101';
+
+CREATE OR REPLACE VIEW pkt_r AS
+    SELECT
+        *
+    FROM
+        rsrent
+    WHERE
+        pickbranch = 'RSPT-PKT';
+
+CREATE OR REPLACE VIEW pkt_m AS
+    SELECT
+        m.*
+    FROM
+        rsmaintenance m
+        JOIN rscar c ON m.maintno = c.maintno
+    WHERE
+        c.branchno = 'RSB-101';
+
+CREATE OR REPLACE VIEW pkt_cu AS
+    SELECT
+        cu.customerno,
+        cu.fname,
+        cu.lname,
+        cu.dlicense,
+        cu.idcardpassportno,
+        cu.email,
+        cu.phone,
+        cu.paymentmethod,
+        cu.bdate
+    FROM
+        rscustomer cu
+        JOIN rsrent r ON cu.customerno = r.customerno
+    WHERE
+        r.pickbranch = 'RSPT-PKT';
+
+CREATE OR REPLACE VIEW cnx_m_s AS
+    SELECT
+        *
+    FROM
+        rsstaff
+    WHERE
+        branchno = 'RSB-102';
+
+CREATE OR REPLACE VIEW cnx_m_b AS
+    SELECT
+        *
+    FROM
+        rsbranch
+    WHERE
+        branchno = 'RSB-102';
+
+CREATE OR REPLACE VIEW cnx_m_c AS
+    SELECT
+        *
+    FROM
+        rscar
+    WHERE
+        branchno = 'RSB-102';
+
+CREATE OR REPLACE VIEW cnx_r AS
+    SELECT
+        *
+    FROM
+        rsrent
+    WHERE
+        pickbranch = 'RSPT-CNX';
+
+CREATE OR REPLACE VIEW cnx_m AS
+    SELECT
+        m.*
+    FROM
+        rsmaintenance m
+        JOIN rscar c ON m.maintno = c.maintno
+    WHERE
+        c.branchno = 'RSB-102';
+
+CREATE OR REPLACE VIEW cnx_cu AS
+    SELECT
+        cu.customerno,
+        cu.fname,
+        cu.lname,
+        cu.dlicense,
+        cu.idcardpassportno,
+        cu.email,
+        cu.phone,
+        cu.paymentmethod,
+        cu.bdate
+    FROM
+        rscustomer cu
+        JOIN rsrent r ON cu.customerno = r.customerno
+    WHERE
+        r.pickbranch = 'RSPT-CNX';
+
+CREATE OR REPLACE VIEW kbi_m_s AS
+    SELECT
+        *
+    FROM
+        rsstaff
+    WHERE
+        branchno = 'RSB-103';
+
+CREATE OR REPLACE VIEW kbi_m_b AS
+    SELECT
+        *
+    FROM
+        rsbranch
+    WHERE
+        branchno = 'RSB-103';
+
+CREATE OR REPLACE VIEW kbi_m_c AS
+    SELECT
+        *
+    FROM
+        rscar
+    WHERE
+        branchno = 'RSB-103';
+
+CREATE OR REPLACE VIEW kbi_r AS
+    SELECT
+        *
+    FROM
+        rsrent
+    WHERE
+        pickbranch = 'RSPT-KBI';
+
+CREATE OR REPLACE VIEW kbi_m AS
+    SELECT
+        m.*
+    FROM
+        rsmaintenance m
+        JOIN rscar c ON m.maintno = c.maintno
+    WHERE
+        c.branchno = 'RSB-103';
+
+CREATE OR REPLACE VIEW kbi_cu AS
+    SELECT
+        cu.customerno,
+        cu.fname,
+        cu.lname,
+        cu.dlicense,
+        cu.idcardpassportno,
+        cu.email,
+        cu.phone,
+        cu.paymentmethod,
+        cu.bdate
+    FROM
+        rscustomer cu
+        JOIN rsrent r ON cu.customerno = r.customerno
+    WHERE
+        r.pickbranch = 'RSPT-KBI';
+
+CREATE OR REPLACE VIEW ryg_m_s AS
+    SELECT
+        *
+    FROM
+        rsstaff
+    WHERE
+        branchno = 'RSB-104';
+
+CREATE OR REPLACE VIEW ryg_m_b AS
+    SELECT
+        *
+    FROM
+        rsbranch
+    WHERE
+        branchno = 'RSB-104';
+
+CREATE OR REPLACE VIEW ryg_m_c AS
+    SELECT
+        *
+    FROM
+        rscar
+    WHERE
+        branchno = 'RSB-104';
+
+CREATE OR REPLACE VIEW ryg_r AS
+    SELECT
+        *
+    FROM
+        rsrent
+    WHERE
+        pickbranch = 'RSPT-RYG';
+
+CREATE OR REPLACE VIEW ryg_m AS
+    SELECT
+        m.*
+    FROM
+        rsmaintenance m
+        JOIN rscar c ON m.maintno = c.maintno
+    WHERE
+        c.branchno = 'RSB-104';
+
+CREATE OR REPLACE VIEW ryg_cu AS
+    SELECT
+        cu.customerno,
+        cu.fname,
+        cu.lname,
+        cu.dlicense,
+        cu.idcardpassportno,
+        cu.email,
+        cu.phone,
+        cu.paymentmethod,
+        cu.bdate
+    FROM
+        rscustomer cu
+        JOIN rsrent r ON cu.customerno = r.customerno
+    WHERE
+        r.pickbranch = 'RSPT-RYG';
+
+CREATE OR REPLACE VIEW ska_m_s AS
+    SELECT
+        *
+    FROM
+        rsstaff
+    WHERE
+        branchno = 'RSB-105';
+
+CREATE OR REPLACE VIEW ska_m_b AS
+    SELECT
+        *
+    FROM
+        rsbranch
+    WHERE
+        branchno = 'RSB-105';
+
+CREATE OR REPLACE VIEW ska_m_c AS
+    SELECT
+        *
+    FROM
+        rscar
+    WHERE
+        branchno = 'RSB-105';
+
+CREATE OR REPLACE VIEW ska_r AS
+    SELECT
+        *
+    FROM
+        rsrent
+    WHERE
+        pickbranch = 'RSPT-SKA';
+
+CREATE OR REPLACE VIEW ska_m AS
+    SELECT
+        m.*
+    FROM
+        rsmaintenance m
+        JOIN rscar c ON m.maintno = c.maintno
+    WHERE
+        c.branchno = 'RSB-105';
+
+CREATE OR REPLACE VIEW ska_cu AS
+    SELECT
+        cu.customerno,
+        cu.fname,
+        cu.lname,
+        cu.dlicense,
+        cu.idcardpassportno,
+        cu.email,
+        cu.phone,
+        cu.paymentmethod,
+        cu.bdate
+    FROM
+        rscustomer cu
+        JOIN rsrent r ON cu.customerno = r.customerno
+    WHERE
+        r.pickbranch = 'RSPT-SKA';
+
+CREATE OR REPLACE VIEW cri_m_s AS
+    SELECT
+        *
+    FROM
+        rsstaff
+    WHERE
+        branchno = 'RSB-106';
+
+CREATE OR REPLACE VIEW cri_m_b AS
+    SELECT
+        *
+    FROM
+        rsbranch
+    WHERE
+        branchno = 'RSB-106';
+
+CREATE OR REPLACE VIEW cri_m_c AS
+    SELECT
+        *
+    FROM
+        rscar
+    WHERE
+        branchno = 'RSB-106';
+
+CREATE OR REPLACE VIEW cri_r AS
+    SELECT
+        *
+    FROM
+        rsrent
+    WHERE
+        pickbranch = 'RSPT-CRI';
+
+CREATE OR REPLACE VIEW cri_m AS
+    SELECT
+        m.*
+    FROM
+        rsmaintenance m
+        JOIN rscar c ON m.maintno = c.maintno
+    WHERE
+        c.branchno = 'RSB-106';
+
+CREATE OR REPLACE VIEW cri_cu AS
+    SELECT
+        cu.customerno,
+        cu.fname,
+        cu.lname,
+        cu.dlicense,
+        cu.idcardpassportno,
+        cu.email,
+        cu.phone,
+        cu.paymentmethod,
+        cu.bdate
+    FROM
+        rscustomer cu
+        JOIN rsrent r ON cu.customerno = r.customerno
+    WHERE
+        r.pickbranch = 'RSPT-CRI';
+
+CREATE OR REPLACE VIEW plk_m_s AS
+    SELECT
+        *
+    FROM
+        rsstaff
+    WHERE
+        branchno = 'RSB-107';
+
+CREATE OR REPLACE VIEW plk_m_b AS
+    SELECT
+        *
+    FROM
+        rsbranch
+    WHERE
+        branchno = 'RSB-107';
+
+CREATE OR REPLACE VIEW plk_m_c AS
+    SELECT
+        *
+    FROM
+        rscar
+    WHERE
+        branchno = 'RSB-107';
+
+CREATE OR REPLACE VIEW plk_r AS
+    SELECT
+        *
+    FROM
+        rsrent
+    WHERE
+        pickbranch = 'RSPT-PLK';
+
+CREATE OR REPLACE VIEW plk_m AS
+    SELECT
+        m.*
+    FROM
+        rsmaintenance m
+        JOIN rscar c ON m.maintno = c.maintno
+    WHERE
+        c.branchno = 'RSB-107';
+
+CREATE OR REPLACE VIEW plk_cu AS
+    SELECT
+        cu.customerno,
+        cu.fname,
+        cu.lname,
+        cu.dlicense,
+        cu.idcardpassportno,
+        cu.email,
+        cu.phone,
+        cu.paymentmethod,
+        cu.bdate
+    FROM
+        rscustomer cu
+        JOIN rsrent r ON cu.customerno = r.customerno
+    WHERE
+        r.pickbranch = 'RSPT-PLK';
+
+CREATE OR REPLACE VIEW udn_m_s AS
+    SELECT
+        *
+    FROM
+        rsstaff
+    WHERE
+        branchno = 'RSB-108';
+
+CREATE OR REPLACE VIEW udn_m_b AS
+    SELECT
+        *
+    FROM
+        rsbranch
+    WHERE
+        branchno = 'RSB-108';
+
+CREATE OR REPLACE VIEW udn_m_c AS
+    SELECT
+        *
+    FROM
+        rscar
+    WHERE
+        branchno = 'RSB-108';
+
+CREATE OR REPLACE VIEW udn_r AS
+    SELECT
+        *
+    FROM
+        rsrent
+    WHERE
+        pickbranch = 'RSPT-UDN';
+
+CREATE OR REPLACE VIEW udn_m AS
+    SELECT
+        m.*
+    FROM
+        rsmaintenance m
+        JOIN rscar c ON m.maintno = c.maintno
+    WHERE
+        c.branchno = 'RSB-108';
+
+CREATE OR REPLACE VIEW udn_cu AS
+    SELECT
+        cu.customerno,
+        cu.fname,
+        cu.lname,
+        cu.dlicense,
+        cu.idcardpassportno,
+        cu.email,
+        cu.phone,
+        cu.paymentmethod,
+        cu.bdate
+    FROM
+        rscustomer cu
+        JOIN rsrent r ON cu.customerno = r.customerno
+    WHERE
+        r.pickbranch = 'RSPT-UDN';
+
+CREATE OR REPLACE VIEW kkn_m_s AS
+    SELECT
+        *
+    FROM
+        rsstaff
+    WHERE
+        branchno = 'RSB-109';
+
+CREATE OR REPLACE VIEW kkn_m_b AS
+    SELECT
+        *
+    FROM
+        rsbranch
+    WHERE
+        branchno = 'RSB-109';
+
+CREATE OR REPLACE VIEW kkn_m_c AS
+    SELECT
+        *
+    FROM
+        rscar
+    WHERE
+        branchno = 'RSB-109';
+
+CREATE OR REPLACE VIEW kkn_r AS
+    SELECT
+        *
+    FROM
+        rsrent
+    WHERE
+        pickbranch = 'RSPT-KKN';
+
+CREATE OR REPLACE VIEW kkn_m AS
+    SELECT
+        m.*
+    FROM
+        rsmaintenance m
+        JOIN rscar c ON m.maintno = c.maintno
+    WHERE
+        c.branchno = 'RSB-109';
+
+CREATE OR REPLACE VIEW kkn_cu AS
+    SELECT
+        cu.customerno,
+        cu.fname,
+        cu.lname,
+        cu.dlicense,
+        cu.idcardpassportno,
+        cu.email,
+        cu.phone,
+        cu.paymentmethod,
+        cu.bdate
+    FROM
+        rscustomer cu
+        JOIN rsrent r ON cu.customerno = r.customerno
+    WHERE
+        r.pickbranch = 'RSPT-KKN';
+
+CREATE OR REPLACE VIEW npm_m_s AS
+    SELECT
+        *
+    FROM
+        rsstaff
+    WHERE
+        branchno = 'RSB-110';
+
+CREATE OR REPLACE VIEW npm_m_b AS
+    SELECT
+        *
+    FROM
+        rsbranch
+    WHERE
+        branchno = 'RSB-110';
+
+CREATE OR REPLACE VIEW npm_m_c AS
+    SELECT
+        *
+    FROM
+        rscar
+    WHERE
+        branchno = 'RSB-110';
+
+CREATE OR REPLACE VIEW npm_r AS
+    SELECT
+        *
+    FROM
+        rsrent
+    WHERE
+        pickbranch = 'RSPT-NPM';
+
+CREATE OR REPLACE VIEW npm_m AS
+    SELECT
+        m.*
+    FROM
+        rsmaintenance m
+        JOIN rscar c ON m.maintno = c.maintno
+    WHERE
+        c.branchno = 'RSB-110';
+
+CREATE OR REPLACE VIEW npm_cu AS
+    SELECT
+        cu.customerno,
+        cu.fname,
+        cu.lname,
+        cu.dlicense,
+        cu.idcardpassportno,
+        cu.email,
+        cu.phone,
+        cu.paymentmethod,
+        cu.bdate
+    FROM
+        rscustomer cu
+        JOIN rsrent r ON cu.customerno = r.customerno
+    WHERE
+        r.pickbranch = 'RSPT-NPM';
+
+CREATE OR REPLACE VIEW snk_m_s AS
+    SELECT
+        *
+    FROM
+        rsstaff
+    WHERE
+        branchno = 'RSB-111';
+
+CREATE OR REPLACE VIEW snk_m_b AS
+    SELECT
+        *
+    FROM
+        rsbranch
+    WHERE
+        branchno = 'RSB-111';
+
+CREATE OR REPLACE VIEW snk_m_c AS
+    SELECT
+        *
+    FROM
+        rscar
+    WHERE
+        branchno = 'RSB-111';
+
+CREATE OR REPLACE VIEW snk_r AS
+    SELECT
+        *
+    FROM
+        rsrent
+    WHERE
+        pickbranch = 'RSPT-SNK';
+
+CREATE OR REPLACE VIEW snk_m AS
+    SELECT
+        m.*
+    FROM
+        rsmaintenance m
+        JOIN rscar c ON m.maintno = c.maintno
+    WHERE
+        c.branchno = 'RSB-111';
+
+CREATE OR REPLACE VIEW snk_cu AS
+    SELECT
+        cu.customerno,
+        cu.fname,
+        cu.lname,
+        cu.dlicense,
+        cu.idcardpassportno,
+        cu.email,
+        cu.phone,
+        cu.paymentmethod,
+        cu.bdate
+    FROM
+        rscustomer cu
+        JOIN rsrent r ON cu.customerno = r.customerno
+    WHERE
+        r.pickbranch = 'RSPT-SNK';
+
+CREATE OR REPLACE VIEW ubn_m_s AS
+    SELECT
+        *
+    FROM
+        rsstaff
+    WHERE
+        branchno = 'RSB-112';
+
+CREATE OR REPLACE VIEW ubn_m_b AS
+    SELECT
+        *
+    FROM
+        rsbranch
+    WHERE
+        branchno = 'RSB-112';
+
+CREATE OR REPLACE VIEW ubn_m_c AS
+    SELECT
+        *
+    FROM
+        rscar
+    WHERE
+        branchno = 'RSB-112';
+
+CREATE OR REPLACE VIEW ubn_r AS
+    SELECT
+        *
+    FROM
+        rsrent
+    WHERE
+        pickbranch = 'RSPT-UBN';
+
+CREATE OR REPLACE VIEW ubn_m AS
+    SELECT
+        m.*
+    FROM
+        rsmaintenance m
+        JOIN rscar c ON m.maintno = c.maintno
+    WHERE
+        c.branchno = 'RSB-112';
+
+CREATE OR REPLACE VIEW ubn_cu AS
+    SELECT
+        cu.customerno,
+        cu.fname,
+        cu.lname,
+        cu.dlicense,
+        cu.idcardpassportno,
+        cu.email,
+        cu.phone,
+        cu.paymentmethod,
+        cu.bdate
+    FROM
+        rscustomer cu
+        JOIN rsrent r ON cu.customerno = r.customerno
+    WHERE
+        r.pickbranch = 'RSPT-UBN';
+
+CREATE OR REPLACE VIEW sni_m_s AS
+    SELECT
+        *
+    FROM
+        rsstaff
+    WHERE
+        branchno = 'RSB-113';
+
+CREATE OR REPLACE VIEW sni_m_b AS
+    SELECT
+        *
+    FROM
+        rsbranch
+    WHERE
+        branchno = 'RSB-113';
+
+CREATE OR REPLACE VIEW sni_m_c AS
+    SELECT
+        *
+    FROM
+        rscar
+    WHERE
+        branchno = 'RSB-113';
+
+CREATE OR REPLACE VIEW sni_r AS
+    SELECT
+        *
+    FROM
+        rsrent
+    WHERE
+        pickbranch = 'RSPT-SNI';
+
+CREATE OR REPLACE VIEW sni_m AS
+    SELECT
+        m.*
+    FROM
+        rsmaintenance m
+        JOIN rscar c ON m.maintno = c.maintno
+    WHERE
+        c.branchno = 'RSB-113';
+
+CREATE OR REPLACE VIEW sni_cu AS
+    SELECT
+        cu.customerno,
+        cu.fname,
+        cu.lname,
+        cu.dlicense,
+        cu.idcardpassportno,
+        cu.email,
+        cu.phone,
+        cu.paymentmethod,
+        cu.bdate
+    FROM
+        rscustomer cu
+        JOIN rsrent r ON cu.customerno = r.customerno
+    WHERE
+        r.pickbranch = 'RSPT-SNI';
+
+CREATE OR REPLACE VIEW nst_m_s AS
+    SELECT
+        *
+    FROM
+        rsstaff
+    WHERE
+        branchno = 'RSB-114';
+
+CREATE OR REPLACE VIEW nst_m_b AS
+    SELECT
+        *
+    FROM
+        rsbranch
+    WHERE
+        branchno = 'RSB-114';
+
+CREATE OR REPLACE VIEW nst_m_c AS
+    SELECT
+        *
+    FROM
+        rscar
+    WHERE
+        branchno = 'RSB-114';
+
+CREATE OR REPLACE VIEW nst_r AS
+    SELECT
+        *
+    FROM
+        rsrent
+    WHERE
+        pickbranch = 'RSPT-NST';
+
+CREATE OR REPLACE VIEW nst_m AS
+    SELECT
+        m.*
+    FROM
+        rsmaintenance m
+        JOIN rscar c ON m.maintno = c.maintno
+    WHERE
+        c.branchno = 'RSB-114';
+
+CREATE OR REPLACE VIEW nst_cu AS
+    SELECT
+        cu.customerno,
+        cu.fname,
+        cu.lname,
+        cu.dlicense,
+        cu.idcardpassportno,
+        cu.email,
+        cu.phone,
+        cu.paymentmethod,
+        cu.bdate
+    FROM
+        rscustomer cu
+        JOIN rsrent r ON cu.customerno = r.customerno
+    WHERE
+        r.pickbranch = 'RSPT-NST';
+
+CREATE OR REPLACE VIEW trg_m_s AS
+    SELECT
+        *
+    FROM
+        rsstaff
+    WHERE
+        branchno = 'RSB-115';
+
+CREATE OR REPLACE VIEW trg_m_b AS
+    SELECT
+        *
+    FROM
+        rsbranch
+    WHERE
+        branchno = 'RSB-115';
+
+CREATE OR REPLACE VIEW trg_m_c AS
+    SELECT
+        *
+    FROM
+        rscar
+    WHERE
+        branchno = 'RSB-115';
+
+CREATE OR REPLACE VIEW trg_r AS
+    SELECT
+        *
+    FROM
+        rsrent
+    WHERE
+        pickbranch = 'RSPT-TRG';
+
+CREATE OR REPLACE VIEW trg_m AS
+    SELECT
+        m.*
+    FROM
+        rsmaintenance m
+        JOIN rscar c ON m.maintno = c.maintno
+    WHERE
+        c.branchno = 'RSB-115';
+
+CREATE OR REPLACE VIEW trg_cu AS
+    SELECT
+        cu.customerno,
+        cu.fname,
+        cu.lname,
+        cu.dlicense,
+        cu.idcardpassportno,
+        cu.email,
+        cu.phone,
+        cu.paymentmethod,
+        cu.bdate
+    FROM
+        rscustomer cu
+        JOIN rsrent r ON cu.customerno = r.customerno
+    WHERE
+        r.pickbranch = 'RSPT-TRG';
+
+CREATE OR REPLACE VIEW nwt_m_s AS
+    SELECT
+        *
+    FROM
+        rsstaff
+    WHERE
+        branchno = 'RSB-116';
+
+CREATE OR REPLACE VIEW nwt_m_b AS
+    SELECT
+        *
+    FROM
+        rsbranch
+    WHERE
+        branchno = 'RSB-116';
+
+CREATE OR REPLACE VIEW nwt_m_c AS
+    SELECT
+        *
+    FROM
+        rscar
+    WHERE
+        branchno = 'RSB-116';
+
+CREATE OR REPLACE VIEW nwt_r AS
+    SELECT
+        *
+    FROM
+        rsrent
+    WHERE
+        pickbranch = 'RSPT-NWT';
+
+CREATE OR REPLACE VIEW nwt_m AS
+    SELECT
+        m.*
+    FROM
+        rsmaintenance m
+        JOIN rscar c ON m.maintno = c.maintno
+    WHERE
+        c.branchno = 'RSB-116';
+
+CREATE OR REPLACE VIEW nwt_cu AS
+    SELECT
+        cu.customerno,
+        cu.fname,
+        cu.lname,
+        cu.dlicense,
+        cu.idcardpassportno,
+        cu.email,
+        cu.phone,
+        cu.paymentmethod,
+        cu.bdate
+    FROM
+        rscustomer cu
+        JOIN rsrent r ON cu.customerno = r.customerno
+    WHERE
+        r.pickbranch = 'RSPT-NWT';
+
+CREATE OR REPLACE VIEW nan_m_s AS
+    SELECT
+        *
+    FROM
+        rsstaff
+    WHERE
+        branchno = 'RSB-117';
+
+CREATE OR REPLACE VIEW nan_m_b AS
+    SELECT
+        *
+    FROM
+        rsbranch
+    WHERE
+        branchno = 'RSB-117';
+
+CREATE OR REPLACE VIEW nan_m_c AS
+    SELECT
+        *
+    FROM
+        rscar
+    WHERE
+        branchno = 'RSB-117';
+
+CREATE OR REPLACE VIEW nan_r AS
+    SELECT
+        *
+    FROM
+        rsrent
+    WHERE
+        pickbranch = 'RSPT-NAN';
+
+CREATE OR REPLACE VIEW nan_m AS
+    SELECT
+        m.*
+    FROM
+        rsmaintenance m
+        JOIN rscar c ON m.maintno = c.maintno
+    WHERE
+        c.branchno = 'RSB-117';
+
+CREATE OR REPLACE VIEW nan_cu AS
+    SELECT
+        cu.customerno,
+        cu.fname,
+        cu.lname,
+        cu.dlicense,
+        cu.idcardpassportno,
+        cu.email,
+        cu.phone,
+        cu.paymentmethod,
+        cu.bdate
+    FROM
+        rscustomer cu
+        JOIN rsrent r ON cu.customerno = r.customerno
+    WHERE
+        r.pickbranch = 'RSPT-NAN';
+
+CREATE OR REPLACE VIEW ret_m_s AS
+    SELECT
+        *
+    FROM
+        rsstaff
+    WHERE
+        branchno = 'RSB-118';
+
+CREATE OR REPLACE VIEW ret_m_b AS
+    SELECT
+        *
+    FROM
+        rsbranch
+    WHERE
+        branchno = 'RSB-118';
+
+CREATE OR REPLACE VIEW ret_m_c AS
+    SELECT
+        *
+    FROM
+        rscar
+    WHERE
+        branchno = 'RSB-118';
+
+CREATE OR REPLACE VIEW ret_r AS
+    SELECT
+        *
+    FROM
+        rsrent
+    WHERE
+        pickbranch = 'RSPT-RET';
+
+CREATE OR REPLACE VIEW ret_m AS
+    SELECT
+        m.*
+    FROM
+        rsmaintenance m
+        JOIN rscar c ON m.maintno = c.maintno
+    WHERE
+        c.branchno = 'RSB-118';
+
+CREATE OR REPLACE VIEW ret_cu AS
+    SELECT
+        cu.customerno,
+        cu.fname,
+        cu.lname,
+        cu.dlicense,
+        cu.idcardpassportno,
+        cu.email,
+        cu.phone,
+        cu.paymentmethod,
+        cu.bdate
+    FROM
+        rscustomer cu
+        JOIN rsrent r ON cu.customerno = r.customerno
+    WHERE
+        r.pickbranch = 'RSPT-RET';
+
+CREATE OR REPLACE VIEW lei_m_s AS
+    SELECT
+        *
+    FROM
+        rsstaff
+    WHERE
+        branchno = 'RSB-119';
+
+CREATE OR REPLACE VIEW lei_m_b AS
+    SELECT
+        *
+    FROM
+        rsbranch
+    WHERE
+        branchno = 'RSB-119';
+
+CREATE OR REPLACE VIEW lei_m_c AS
+    SELECT
+        *
+    FROM
+        rscar
+    WHERE
+        branchno = 'RSB-119';
+
+CREATE OR REPLACE VIEW lei_r AS
+    SELECT
+        *
+    FROM
+        rsrent
+    WHERE
+        pickbranch = 'RSPT-LEI';
+
+CREATE OR REPLACE VIEW lei_m AS
+    SELECT
+        m.*
+    FROM
+        rsmaintenance m
+        JOIN rscar c ON m.maintno = c.maintno
+    WHERE
+        c.branchno = 'RSB-119';
+
+CREATE OR REPLACE VIEW lei_cu AS
+    SELECT
+        cu.customerno,
+        cu.fname,
+        cu.lname,
+        cu.dlicense,
+        cu.idcardpassportno,
+        cu.email,
+        cu.phone,
+        cu.paymentmethod,
+        cu.bdate
+    FROM
+        rscustomer cu
+        JOIN rsrent r ON cu.customerno = r.customerno
+    WHERE
+        r.pickbranch = 'RSPT-LEI';
+
+CREATE OR REPLACE VIEW brm_m_s AS
+    SELECT
+        *
+    FROM
+        rsstaff
+    WHERE
+        branchno = 'RSB-120';
+
+CREATE OR REPLACE VIEW brm_m_b AS
+    SELECT
+        *
+    FROM
+        rsbranch
+    WHERE
+        branchno = 'RSB-120';
+
+CREATE OR REPLACE VIEW brm_m_c AS
+    SELECT
+        *
+    FROM
+        rscar
+    WHERE
+        branchno = 'RSB-120';
+
+CREATE OR REPLACE VIEW brm_r AS
+    SELECT
+        *
+    FROM
+        rsrent
+    WHERE
+        pickbranch = 'RSPT-BRM';
+
+CREATE OR REPLACE VIEW brm_m AS
+    SELECT
+        m.*
+    FROM
+        rsmaintenance m
+        JOIN rscar c ON m.maintno = c.maintno
+    WHERE
+        c.branchno = 'RSB-120';
+
+CREATE OR REPLACE VIEW brm_cu AS
+    SELECT
+        cu.customerno,
+        cu.fname,
+        cu.lname,
+        cu.dlicense,
+        cu.idcardpassportno,
+        cu.email,
+        cu.phone,
+        cu.paymentmethod,
+        cu.bdate
+    FROM
+        rscustomer cu
+        JOIN rsrent r ON cu.customerno = r.customerno
+    WHERE
+        r.pickbranch = 'RSPT-BRM';
+
+CREATE OR REPLACE VIEW rng_m_s AS
+    SELECT
+        *
+    FROM
+        rsstaff
+    WHERE
+        branchno = 'RSB-121';
+
+CREATE OR REPLACE VIEW rng_m_b AS
+    SELECT
+        *
+    FROM
+        rsbranch
+    WHERE
+        branchno = 'RSB-121';
+
+CREATE OR REPLACE VIEW rng_m_c AS
+    SELECT
+        *
+    FROM
+        rscar
+    WHERE
+        branchno = 'RSB-121';
+
+CREATE OR REPLACE VIEW rng_r AS
+    SELECT
+        *
+    FROM
+        rsrent
+    WHERE
+        pickbranch = 'RSPT-RNG';
+
+CREATE OR REPLACE VIEW rng_m AS
+    SELECT
+        m.*
+    FROM
+        rsmaintenance m
+        JOIN rscar c ON m.maintno = c.maintno
+    WHERE
+        c.branchno = 'RSB-121';
+
+CREATE OR REPLACE VIEW rng_cu AS
+    SELECT
+        cu.customerno,
+        cu.fname,
+        cu.lname,
+        cu.dlicense,
+        cu.idcardpassportno,
+        cu.email,
+        cu.phone,
+        cu.paymentmethod,
+        cu.bdate
+    FROM
+        rscustomer cu
+        JOIN rsrent r ON cu.customerno = r.customerno
+    WHERE
+        r.pickbranch = 'RSPT-RNG';
+
+CREATE OR REPLACE VIEW yla_m_s AS
+    SELECT
+        *
+    FROM
+        rsstaff
+    WHERE
+        branchno = 'RSB-122';
+
+CREATE OR REPLACE VIEW yla_m_b AS
+    SELECT
+        *
+    FROM
+        rsbranch
+    WHERE
+        branchno = 'RSB-122';
+
+CREATE OR REPLACE VIEW yla_m_c AS
+    SELECT
+        *
+    FROM
+        rscar
+    WHERE
+        branchno = 'RSB-122';
+
+CREATE OR REPLACE VIEW yla_r AS
+    SELECT
+        *
+    FROM
+        rsrent
+    WHERE
+        pickbranch = 'RSPT-YLA';
+
+CREATE OR REPLACE VIEW yla_m AS
+    SELECT
+        m.*
+    FROM
+        rsmaintenance m
+        JOIN rscar c ON m.maintno = c.maintno
+    WHERE
+        c.branchno = 'RSB-122';
+
+CREATE OR REPLACE VIEW yla_cu AS
+    SELECT
+        cu.customerno,
+        cu.fname,
+        cu.lname,
+        cu.dlicense,
+        cu.idcardpassportno,
+        cu.email,
+        cu.phone,
+        cu.paymentmethod,
+        cu.bdate
+    FROM
+        rscustomer cu
+        JOIN rsrent r ON cu.customerno = r.customerno
+    WHERE
+        r.pickbranch = 'RSPT-YLA';
