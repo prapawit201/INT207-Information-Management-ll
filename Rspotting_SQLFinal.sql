@@ -176,6 +176,110 @@ drop index RSbranch_BM_IDX;
 drop index RSstaff_BT_IDX;
 
 /*
-========== Hello  ===========
+=========== Hello  ===========
 ======== Create database ======
 */
+
+CREATE TABLE rsbranch (
+    branchno     VARCHAR2(13) NOT NULL,
+    branchname   VARCHAR2(20) NOT NULL,
+    province     VARCHAR2(40) NOT NULL,
+    address      VARCHAR2(40) NOT NULL,
+    CONSTRAINT pk_branch_branchno PRIMARY KEY ( branchno )
+);
+
+CREATE TABLE rscustomer (
+    customerno         VARCHAR2(13) NOT NULL,
+    fname              VARCHAR2(40) NOT NULL,
+    lname              VARCHAR2(40) NOT NULL,
+    dlicense           VARCHAR2(5) NOT NULL CHECK ( dlicense IN (
+        'yes',
+        'no'
+    ) ),
+    idcardpassportno   VARCHAR2(40) NOT NULL,
+    email              VARCHAR2(100) NOT NULL,
+    phone              VARCHAR2(20),
+    paymentmethod      VARCHAR2(10) CHECK ( paymentmethod IN (
+        'Debit',
+        'Credit',
+        'Cash'
+    ) ),
+    bdate              VARCHAR2(20),
+    password           VARCHAR2(40) NOT NULL,
+    CONSTRAINT pk_customer_customerno PRIMARY KEY ( customerno )
+);
+
+CREATE TABLE rsmaintenance (
+    maintno       VARCHAR2(13) NOT NULL,
+    maintdate     DATE NOT NULL,
+    maintprice    NUMBER(5) NOT NULL,
+    mainttype     VARCHAR2(40) CHECK ( mainttype = 'Wheel'
+                                   OR mainttype = 'Engine'
+                                   OR mainttype = 'Break'
+                                   OR mainttype = 'Battery'
+                                   OR mainttype = 'Liquid'
+                                   OR mainttype = 'Others' ),
+    maintdetail   VARCHAR2(100) NOT NULL,
+    CONSTRAINT pk_maintenance_maintno PRIMARY KEY ( maintno )
+);
+
+CREATE TABLE rsstaff (
+    staffno    VARCHAR2(13) NOT NULL,
+    fname      VARCHAR2(40) NOT NULL,
+    lname      VARCHAR2(40) NOT NULL,
+    position   VARCHAR2(20) NOT NULL,
+    salary     VARCHAR2(10) NOT NULL,
+    branchno   VARCHAR2(13) NOT NULL,
+    CONSTRAINT pk_staff_staffno PRIMARY KEY ( staffno ),
+    CONSTRAINT fk_branch_branchno FOREIGN KEY ( branchno )
+        REFERENCES rsbranch ( branchno )
+);
+
+CREATE TABLE rscar (
+    carno          VARCHAR2(13) NOT NULL,
+    brand          VARCHAR2(50) NOT NULL,
+    carsize        VARCHAR2(3) NOT NULL CHECK ( carsize = 'S'
+                                         OR carsize = 'M'
+                                         OR carsize = 'L' ),
+    lugguage       NUMBER(1) NOT NULL CHECK ( lugguage = 1
+                                        OR lugguage = 2
+                                        OR lugguage = 3
+                                        OR lugguage = 4 ),
+    price          DECIMAL(10, 2) NOT NULL,
+    seat           NUMBER(2) NOT NULL CHECK ( seat = 2
+                                    OR seat = 5
+                                    OR seat = 7 ),
+    cartype        VARCHAR2(40) NOT NULL CHECK ( cartype = 'Saloon'
+                                          OR cartype = 'Pickup'
+                                          OR cartype = 'SUV' ),
+    engine         VARCHAR2(10) NOT NULL CHECK ( engine = 'Diesel'
+                                         OR engine = 'Benzine' ),
+    transmission   VARCHAR2(10) NOT NULL CHECK ( transmission = 'Manual'
+                                               OR transmission = 'Auto' ),
+    branchno       VARCHAR2(13) NOT NULL,
+    maintno        VARCHAR2(13),
+    CONSTRAINT pk_car_carno PRIMARY KEY ( carno ),
+    CONSTRAINT fk_car_branchno FOREIGN KEY ( branchno )
+        REFERENCES rsbranch ( branchno ),
+    CONSTRAINT fk_car_maintno FOREIGN KEY ( maintno )
+        REFERENCES rsmaintenance ( maintno )
+);
+
+CREATE TABLE rsrent (
+    rentno         VARCHAR2(13) NOT NULL,
+    pickdate       DATE NOT NULL,
+    returndate     DATE NOT NULL,
+    pickbranch     VARCHAR2(40) NOT NULL,
+    returnbranch   VARCHAR2(40) NOT NULL,
+    price          NUMBER(5) NOT NULL,
+    customerno     VARCHAR2(13) NOT NULL,
+    carno          VARCHAR2(13) NOT NULL,
+    staffno        VARCHAR2(13) NOT NULL,
+    CONSTRAINT pk_rent_rentno PRIMARY KEY ( rentno ),
+    CONSTRAINT fk_rent_customerno FOREIGN KEY ( customerno )
+        REFERENCES rscustomer ( customerno ),
+    CONSTRAINT fk_rent_carno FOREIGN KEY ( carno )
+        REFERENCES rscar ( carno ),
+    CONSTRAINT fk_rent_staffno FOREIGN KEY ( staffno )
+        REFERENCES rsstaff ( staffno )
+);
