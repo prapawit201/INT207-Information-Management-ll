@@ -1,13 +1,11 @@
 /*
 ========== Clean All TABLE in Database ===========
 */
--- all Table
-drop table RSRENT CASCADE CONSTRAINTS;
-drop table RScustomer CASCADE CONSTRAINTS;
-drop table RSstaff CASCADE CONSTRAINTS;
-drop table RScar CASCADE CONSTRAINTS;
-drop table RSBRANCH CASCADE CONSTRAINTS;
-drop table RSMaintenance CASCADE CONSTRAINTS;
+--index
+drop index RSrent_BM_IDX;
+drop index RScar_BM_IDX;
+drop index RSbranch_BM_IDX;
+drop index RSstaff_BT_IDX;
 -- VIEW for Staff & Customer
 DROP VIEW bkk_m_b;
 DROP VIEW bkk_m_s;
@@ -169,17 +167,42 @@ DROP VIEW yla_m_c ;
 DROP VIEW yla_r ;
 DROP VIEW yla_m ;
 DROP VIEW yla_cu ;
---index
-drop index RSrent_BM_IDX;
-drop index RScar_BM_IDX;
-drop index RSbranch_BM_IDX;
-drop index RSstaff_BT_IDX;
+-- all Table
+drop table RSRENT CASCADE CONSTRAINTS;
+drop table RScustomer CASCADE CONSTRAINTS;
+drop table RSstaff CASCADE CONSTRAINTS;
+drop table RScar CASCADE CONSTRAINTS;
+drop table RSBRANCH CASCADE CONSTRAINTS;
+drop table RSMaintenance CASCADE CONSTRAINTS;
+
+
 
 /*
 =========== Hello  ===========
 ======== Create database ======
 */
 
+--=========create User===========
+create user RSowner
+IDENTIFIED by lovesql;
+grant CREATE session to RSowner;
+--create+grant user officer
+create user RSofficer
+IDENTIFIED by lovesql;
+grant CREATE session to RSofficer;
+--create+grant user manager
+create user RSmanager
+IDENTIFIED by lovesql;
+grant CREATE session to RSmanager;
+--create+grant user staff
+create user RSstaff
+IDENTIFIED by lovesql;
+grant CREATE session to RSstaff;
+--create+grant user customer
+create user RScustomer
+IDENTIFIED by lovesql;
+grant CREATE session to RScustomer;
+--=========create Table===========
 CREATE TABLE rsbranch (
     branchno     VARCHAR2(13) NOT NULL,
     branchname   VARCHAR2(20) NOT NULL,
